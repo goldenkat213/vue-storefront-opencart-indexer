@@ -21,7 +21,7 @@
     "node-mutex": "^0.2.2",
     "print-message": "^2.1.0",
     "promise-limit": "^2.5.0",
-    "shelljs": "^0.7.8",
+    "shelljs": "^0.8.4",
     "unirest": "^0.5.1",
     "url-parse": "^1.2.0",
     "valid-url": "^1.0.9"

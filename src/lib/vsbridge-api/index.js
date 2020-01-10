@@ -9,8 +9,8 @@ class VsBridgeApiClient {
         if (!config.vsbridge.url)
             throw Error('url is required config keys for Pimcore Api Client')
 
-        this.baseUrl = `${config.url}vsbrdige/`
-        this.apiKey = '' // will be set after the authorization
+        this.baseUrl = `${config.url}index.php?route=vsbrdige/`
+        this.apiKey = '85sA81rvon4x6H7N7ef4HbgSw7Wt6ydt14gujOsql7tRduu8RN2bFHxX7FWmHmMNJWsF2nbugmL1MbKmdfaVYPZ5s1Xg1eVzcYOwu2a3ttBUSNo3KT4HEs7NPfD0Vm2JAUShDN88zX75BSKMwtJo7x3vwfNNjqlCzrh5GRHnMbejMrMce7x4MAGvYyLXf3MUTNByzKJxdHx3WRoQGK5h8Lj3N7eRbwhenkD87WlTXVzIBd3xjZ4S3NTng02HfZnL' // will be set after the authorization
         this.client = unirest
     }
 
@@ -21,6 +21,7 @@ class VsBridgeApiClient {
         return unirest.headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
     }
     _setupUrl(endpointUrl) {
+        //const url = endpointUrl;
         const url = endpointUrl + '?apikey=' + encodeURIComponent(this.apiKey)
         console.log('Fetching data from', url);
         return url

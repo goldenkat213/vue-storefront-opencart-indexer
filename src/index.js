@@ -109,12 +109,11 @@ function recreateTempIndex() {
     let step2 = () => {
         client.indices.create({ index: `${config.elasticsearch.indexName}_${INDEX_VERSION}` }).then(result=>{
             console.log('Index Created', result)
-            console.log('** NEW INDEX VERSION', INDEX_VERSION, INDEX_META_DATA.created)
+            console.log('** NEW INDEX VERSION', INDEX_VERSION, INDEX_META_DATA.updated)
         }).then((result) => {
             putMappings(client, `${config.elasticsearch.indexName}_${INDEX_VERSION}`, ()  => {})
         })
     }
-
 
     return client.indices.delete({
         index: `${config.elasticsearch.indexName}_${INDEX_VERSION}`
@@ -231,7 +230,7 @@ cli.command('products',  () => { // TODO: add parallel processing
    importListOf('product', new BasicImporter('product', config, api, page = cli.options.page, pageSize = cli.options.pageSize), config, api, page = cli.options.page, pageSize = cli.options.pageSize).then((result) => {
 
    }).catch(err => {
-      console.error(err)
+      console.error(resp.body + ' Kat213_log' + err)
    })
 })
 

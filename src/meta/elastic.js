@@ -97,6 +97,7 @@ function createIndex(db, indexName, next) {
 function putMappings(db, indexName, next) {
     db.indices.putMapping({
         index: indexName,
+        include_type_name: true,
         type: "product",
         body: {
             properties: {
@@ -177,12 +178,43 @@ function putMappings(db, indexName, next) {
                 tax_class_id: { type: "long" }
             }
         }
-        }).then(res1 => {
+        },{
+        index: indexName,
+        include_type_name: true,
+        type: "taxrule",
+        body: {
+            properties: {
+                id: { type: "long" },
+                rates: {
+                    properties: {
+                        rate: { type: "float" }
+                    }
+                }
+            }
+        }
+    },{
+        index: indexName,
+        include_type_name: true,
+        type: "attribute",
+        body: {
+            properties: {
+                id: { type: "long" },
+                attribute_id: { type: "long" },
+                options: {
+                    properties: {
+                        value:  { type: "text", "index" : "not_analyzed" }
+                    }
+                }
+            }
+        }
+    }).then(res1 => {
             console.dir(res1, { depth: null, colors: true })
 
+            /*
             db.indices.putMapping({
                 index: indexName,
-                type: "taxrule",
+                include_type_name: true,
+                type: "taxrule1",
                 body: {
                 properties: {
                     id: { type: "long" },
@@ -198,12 +230,12 @@ function putMappings(db, indexName, next) {
 
                 db.indices.putMapping({
                     index: indexName,
+                    include_type_name: true,
                     type: "attribute",
                     body: {
                     properties: {
                         id: { type: "long" },
                         attribute_id: { type: "long" },
-
                         options: {
                         properties: {
                             value:  { type: "text", "index" : "not_analyzed" }
@@ -220,6 +252,7 @@ function putMappings(db, indexName, next) {
             }).catch(err2 => {
                 throw new Error(err2)
             })
+             */
         }).catch(err1 => {
             console.error(err1)
             next(err1)
